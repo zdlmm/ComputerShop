@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package org.denglin.armeria;
+option java_package = "org.denglin.armeria";
+option java_multiple_files = true;
+
+message ComputerOrder {
+  int32 orderId = 1;
+  string cpuId = 2;
+  string gpuId = 3;
+  string memoryId = 4;
+}
+
+message ComputerOrderRequest {
+  string cpuId = 1;
+  string gpuId = 2;
+  string memoryId = 3;
+}
+
+message GetOrderRequest {
+  int32 id = 1;
+}
+
+import "google/protobuf/empty.proto";
+
+service OrderService {
+  rpc SaveOrder (ComputerOrderRequest) returns (ComputerOrder) {}
+  rpc GetOrderById (GetOrderRequest) returns (ComputerOrder) {}
+}

@@ -1,0 +1,35 @@
+plugins {
+    // Provide convenience executables for trying out the examples.
+    id 'application'
+    id 'com.google.protobuf' version '0.9.4'
+    id 'idea'
+}
+
+group = 'org.denglin.armeria'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    maven { // The google mirror is less flaky than mavenCentral()
+        url "https://maven-central.storage-download.googleapis.com/maven2/" }
+    mavenCentral()
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+def grpcVersion = '1.62.2' // CURRENT_GRPC_VERSION
+
+dependencies {
+    implementation project(':grpc-proto')
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation 'com.linecorp.armeria:armeria:1.27.0'
+    implementation 'com.linecorp.armeria:armeria-grpc:1.27.0'
+    compileOnly "org.apache.tomcat:annotations-api:6.0.53"
+    runtimeOnly "io.grpc:grpc-netty-shaded:${grpcVersion}"
+}
+
+application {
+    mainClass.set('org.denglin.armeria.Main')
+}

@@ -1,0 +1,10 @@
+plugins {
+    id 'java'
+}
+
+group = 'org.denglin.armeria'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
